@@ -3,8 +3,12 @@ import { NgModule } from '@angular/core';
 
 // Router
 import { AppRoutingModule } from './app.route';
+
 // Modules
 import { PagesModule } from './pages/pages.module';
+
+// Services
+import { ServiceModule } from './services/services.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +25,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PagesModule
+    PagesModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
