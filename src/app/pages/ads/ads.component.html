@@ -1,3 +1,31 @@
-<p>
-  ads works!
-</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card text-center">
+      <div class="card-body">
+        <h4 class="card-title">Manager all the ads that you have posted</h4>
+        <a href="#" class="btn btn-outline-success m-2"> Post new room</a>
+        <a href="#" class="btn btn-outline-success m-2"> Post new roommate</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ad-container">
+
+  <div class="row">
+    <div class="col-12">
+      <!-- Card -->
+      <div class="card" *ngFor="let profile of profiles">
+        <div class="card-body">
+          <h4 class="card-title">User {{profile.userId}}</h4>
+          <p class="card-text">{{profile.address}}</p>
+          <p class="card-text">{{profile.movingDate | date}}</p>
+          <a href="#" class="btn btn-outline-primary m-1">Search room/roommate</a>
+          <a href="#" class="btn btn-outline-primary m-1">Messeges form this Ad</a>
+        </div>
+      </div>
+      <!-- Card -->
+    </div>
+  </div>
+  
+</div>

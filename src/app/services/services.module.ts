@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
-import { SideBarService } from './services.index';
+import { SideBarService, AdsService } from './services.index';
+
 
 @NgModule({
     declarations: [],
-    imports: [],
+    imports: [
+        HttpModule
+    ],
     exports: [],
     providers: [
-        SideBarService
+        SideBarService,
+        AdsService
     ],
 })
-export class ServiceModule {}
+export class ServiceModule { }
