@@ -12,20 +12,41 @@
 
 <div class="ad-container">
 
-  <div class="row">
-    <div class="col-12">
-      <!-- Card -->
-      <div class="card" *ngFor="let profile of profiles">
-        <div class="card-body">
-          <h4 class="card-title">User {{profile.userId}}</h4>
-          <p class="card-text">{{profile.address}}</p>
-          <p class="card-text">{{profile.movingDate | date}}</p>
-          <a href="#" class="btn btn-outline-primary m-1">Search room/roommate</a>
-          <a href="#" class="btn btn-outline-primary m-1">Messeges form this Ad</a>
+  <div class="rooms">
+      <div class="row">
+          <div class="col-12">
+              <h4 class="text-muted font-12">Rooms</h4>      
+            <!-- Card -->
+            <div class="card" *ngFor="let profile of profiles">
+              <div class="card-body">
+                <h4 class="card-title">User {{profile.userId}}</h4>
+                <p class="card-text">{{profile.address}}</p>
+                <p class="card-text">{{profile.movingDate | date}}</p>
+                <a href="#" class="btn btn-outline-primary m-1">Search room/roommate</a>
+                <a href="#" class="btn btn-outline-primary m-1">Messeges form this Ad</a>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
         </div>
-      </div>
-      <!-- Card -->
-    </div>
+  </div>
+  <div class="profiles">
+      <div class="row">
+          <div class="col-12">
+              <h4 class="text-muted font-12">Profiles</h4>      
+            <!-- Card -->
+            <div class="card" *ngFor="let profile of profiles">
+              <div class="card-body">
+                <h4 class="card-title">User {{profile.userId}}</h4>
+                <p class="card-text">{{profile.address}}</p>
+                <p class="card-text">{{profile.movingDate | date}}</p>
+                <a href="#" class="btn btn-outline-primary m-1">Search room/roommate</a>
+                <a href="#" class="btn btn-outline-primary m-1">Messeges form this Ad</a>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
+        </div>
   </div>
   
 </div>
