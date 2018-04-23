@@ -15,7 +15,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './login/register.component';
-import { AdsService } from './services/services.index';
 
 @NgModule({
   declarations: [

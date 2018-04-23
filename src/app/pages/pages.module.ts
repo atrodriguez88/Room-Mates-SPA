@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 // Route
 import { PagesRoutingModule } from './pages.route';
@@ -20,6 +21,8 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { SearchRoomComponent } from './search-room/search-room.component';
 import { SearchRoommateComponent } from './search-roommate/search-roommate.component';
 
+import { ArchwizardModule } from 'angular-archwizard';
+
 @NgModule({
     declarations: [
         PagesComponent,
@@ -37,7 +40,9 @@ import { SearchRoommateComponent } from './search-roommate/search-roommate.compo
         CommonModule,
         RouterModule,
         PagesRoutingModule,
-        SharedModule
+        SharedModule,
+        ArchwizardModule,
+        FormsModule
     ],
     exports: [
         PagesComponent,

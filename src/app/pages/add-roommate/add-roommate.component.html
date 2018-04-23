@@ -1,3 +1,94 @@
-<p>
-  add-roommate works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <form novalidate #f="ngForm" (ngSubmit)="submit(f)">
+          <div class="form-body">
+            <h3 class="card-title">Profile</h3>
+            <hr>
+            <div class="row p-t-20">
+              <div class="col-md-6">
+                <div class="form-group" [ngClass]="{'has-danger': inPlace.touched && !inPlace.valid,'has-success': inPlace.valid}">
+                  <label class="control-label" >Place</label>
+                  <input #inPlace='ngModel' [(ngModel)]="profile.address"  name="place" type="text" id="place" class="form-control form-control-danger" placeholder="Where do you want to live?" required>
+                  <small *ngIf="inPlace.touched && !inPlace.valid" class="form-control-feedback"> This field has error. </small>
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-danger': inRent.touched && !inRent.valid,'has-success': inRent.valid}">
+                  <label class="control-label">Max rent per month($)</label>
+                  <input #inRent="ngModel" [(ngModel)]="profile.maxRentMonth" name="rent" type="text" id="rent" class="form-control form-control-danger" placeholder="100" required>
+                  <small *ngIf="inRent.touched && !inRent.valid" class="form-control-feedback"> This field has error. </small>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-success': this.flagGend}">
+                  <label class="control-label">Gender</label>
+                  <select (change)="onGendChange()" #inGender='ngModel' [(ngModel)]="profile.gender" name="gender" class="form-control custom-select" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-success': this.flagDate}">
+                  <label class="control-label">Moving date</label>
+                  <input (change)="onDateChange(inDate)" #inDate='ngModel' [(ngModel)]="profile.movingDate" name="date" type="date" class="form-control" placeholder="dd/mm/yyyy">
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-danger': inAge.touched && !inAge.valid,'has-success': inAge.valid}">
+                    <label class="control-label">Age</label>
+                    <input #inAge='ngModel' [(ngModel)]="profile.age" name="age" type="text" id="age" class="form-control" value="18" required>
+                    <small *ngIf="inAge.touched && !inAge.valid" class="form-control-feedback"> This is inline help </small>
+                  </div>
+                </div>
+                <!--/span-->
+              <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{'has-success': this.flagOcup}">
+                  <label class="control-label">Ocupation</label>
+                  <select (change)="onOcupChange()" #inOcupation='ngModel' [(ngModel)]="profile.ocupationId" name="ocupation" class="form-control custom-select" data-placeholder="Choose a Ocupation" tabindex="1" required>
+                    <option value="1">Student</option>
+                    <option value="2">Profesional</option>
+                    <option value="3">Military</option>
+                    <option value="4">Unemployee</option>
+                    <option value="5">Retired</option>
+                    
+                  </select>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                    <label class="control-label">Comment</label>
+                    <textarea #inComent='ngModel' [(ngModel)]="profile.comentarios" name="coment" type="textarea" rows="4" class="form-control">
+                      </textarea>
+                  </div>
+                </div>
+                <!--/span-->
+            </div>
+          </div>
+          <div class="form-actions">
+            <button [disabled]="!f.valid" type="submit" class="btn btn-success">
+              <i class="fa fa-check"></i> Save</button>
+            <button type="button" class="btn btn-inverse">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

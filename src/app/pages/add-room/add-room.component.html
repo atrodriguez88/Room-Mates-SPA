@@ -1,3 +1,356 @@
-<p>
-  add-room works!
-</p>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+
+        <form action="#">
+          <aw-wizard>
+            <aw-wizard-step stepTitle="About the property">
+              <br>
+              <h4>Property Description</h4>
+              <hr>
+              <section>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="type"> Property Type :
+                        <span class="danger">*</span>
+                      </label>
+                      <select class="custom-select form-control required" id="type" name="type">
+                        <option value="">Select City</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="Dubai">Dubai</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="available"> Room Available :
+                      </label>
+                      <select class="custom-select form-control required" id="available" name="available">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6+</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="betrooms"> Number of bedrooms :
+                      </label>
+                      <select class="custom-select form-control required" id="betrooms" name="betrooms">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6+</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="bathrooms"> Number of bathrooms :
+                      </label>
+                      <select class="custom-select form-control required" id="bathrooms" name="bathrooms">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6+</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Rules :</label>
+                      <ul style="list-style: none">
+                        <li>
+                          <label class="custom-control custom-checkbox block">
+                            <input type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Smoking inside the property allowed</span>
+                          </label>
+                        </li>
+                        <li>
+                          <label class="custom-control custom-checkbox block">
+                            <input type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">Families and children accepted</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Features :</label>
+                      <div class="c-inputs-stacked">
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">Pool</span>
+                        </label>
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">Parking</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <button type="button" class="btn btn-success" awNextStep>
+                <i class="fa fa-arrow-circle-right"></i> Next Step
+              </button>
+            </aw-wizard-step>
+            <aw-wizard-step stepTitle="About the room" awOptionalStep>
+              <br>
+              <h4>Space Details</h4>
+              <hr>
+              <section>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="rent">Rent per month :</label>
+                      <input type="number" class="form-control required" id="rent">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="c-inputs-stacked">
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input" (change)="utility($event)" [checked]='true' #checkutility>
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">Add utility costs to be paid on top of rent</span>
+                        </label>
+                      </div>
+                      <input *ngIf="flag" type="number" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="roomType"> Room Type :
+                      </label>
+                      <select class="custom-select form-control required" id="roomType" name="roomType">
+                        <option value="1">Single Room</option>
+                        <option value="2">Double Room</option>
+                        <option value="3">Shared Room</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="square">Room square meters :</label>
+                      <input type="number" class="form-control required" id="square">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="furnished"> Furnished or Unfurnished :
+                      </label>
+                      <select class="custom-select form-control required" id="furnished" name="furnished">
+                        <option value="1">Furnished</option>
+                        <option value="2">Unfurnished</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="c-inputs-stacked">
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input" [checked]='true' #checkutility>
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">Ensuite bathroom</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="from">Available from :</label>
+                      <input type="datetime" class="form-control" id="from">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="stay"> Minimum stay in months :
+                      </label>
+                      <select class="custom-select form-control" id="stay" name="stay">
+                        <option value="1">No minimum stay in months</option>
+                        <option value="2">3</option>
+                        <option value="1">6</option>
+                        <option value="2">9</option>
+                        <option value="1">12</option>
+                        <option value="2">12+</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <button type="button" class="btn btn-success" awPreviousStep>
+                <i class="fa fa-arrow-circle-left"></i> Previous Step
+              </button>
+              <button type="button" class="btn btn-success" awNextStep>
+                <i class="fa fa-arrow-circle-right"></i> Next Step
+              </button>
+            </aw-wizard-step>
+            <aw-wizard-step stepTitle="About the roommate" awOptionalStep>
+              <br>
+              <h4>Household Description</h4>
+              <hr>
+              <section>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="preferred"> Preferred gender :
+                      </label>
+                      <select class="custom-select form-control" id="preferred" name="preferred">
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Doesn't matter</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="current"> Number of roommates already living there :
+                      </label>
+                      <select class="custom-select form-control" id="current" name="current">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6+</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="prefOcup"> Preferred occupation :
+                      </label>
+                      <select class="custom-select form-control" id="prefOcup" name="prefOcup">
+                        <option value="1">Student</option>
+                        <option value="2">Professional</option>
+                        <option value="3">Doesn't matter</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="prefOcup"> Preferred age :
+                      </label>
+                      <select class="custom-select form-control" id="prefOcup" name="prefOcup">
+                        <option value="1">Range from</option>
+                        <option value="2">20</option>
+                        <option value="3">21</option>
+                      </select>
+                      <hr>
+                      <select class="custom-select form-control" id="prefOcup" name="prefOcup">
+                        <option value="1">Range to</option>
+                        <option value="2">31</option>
+                        <option value="3">32</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <button type="button" class="btn btn-success" awPreviousStep>
+                <i class="fa fa-arrow-circle-left"></i> Previous Step
+              </button>
+              <button type="button" class="btn btn-success" awNextStep>
+                <i class="fa fa-arrow-circle-right"></i> Next Step
+              </button>
+            </aw-wizard-step>
+            <aw-wizard-step stepTitle="About you">
+              <h6>Your Description</h6>
+              <section>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="behName1">Behaviour :</label>
+                      <input type="text" class="form-control required" id="behName1">
+                    </div>
+                    <div class="form-group">
+                      <label for="participants1">Confidance</label>
+                      <input type="text" class="form-control required" id="participants1">
+                    </div>
+                    <div class="form-group">
+                      <label for="participants1">Result</label>
+                      <select class="custom-select form-control required" id="participants1" name="location">
+                        <option value="">Select Result</option>
+                        <option value="Selected">Selected</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Call Second-time">Call Second-time</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="decisions1">Comments</label>
+                      <textarea name="decisions" id="decisions1" rows="4" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Rate Interviwer :</label>
+                      <div class="c-inputs-stacked">
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">1 star</span>
+                        </label>
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">2 star</span>
+                        </label>
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">3 star</span>
+                        </label>
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">4 star</span>
+                        </label>
+                        <label class="inline custom-control custom-checkbox block">
+                          <input type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">5 star</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <button type="button" awPreviousStep>Previous Step</button>
+              <button type="button" (click)="finishFunction()">Finish</button>
+            </aw-wizard-step>
+          </aw-wizard>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

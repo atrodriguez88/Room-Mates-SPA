@@ -3,8 +3,8 @@
     <div class="card text-center">
       <div class="card-body">
         <h4 class="card-title">Manager all the ads that you have posted</h4>
-        <a href="#" class="btn btn-outline-success m-2"> Post new room</a>
-        <a href="#" class="btn btn-outline-success m-2"> Post new roommate</a>
+        <a [routerLink]="['/ads','save','room']" class="btn btn-outline-success m-2"> Post new room</a>
+        <a [routerLink]="['/ads','save','roommate']" class="btn btn-outline-success m-2"> Post new roommate</a>
       </div>
     </div>
   </div>
@@ -12,17 +12,17 @@
 
 <div class="ad-container">
 
-  <div class="rooms">
+  <div class="rooms" *ngIf="rooms.length > 0">
       <div class="row">
           <div class="col-12">
               <h4 class="text-muted font-12">Rooms</h4>      
             <!-- Card -->
-            <div class="card" *ngFor="let profile of profiles">
+            <div class="card" *ngFor="let room of rooms">
               <div class="card-body">
-                <h4 class="card-title">User {{profile.userId}}</h4>
-                <p class="card-text">{{profile.address}}</p>
-                <p class="card-text">{{profile.movingDate | date}}</p>
-                <a href="#" class="btn btn-outline-primary m-1">Search room/roommate</a>
+                <h4 class="card-title">User {{room.userId}}</h4>
+                <p class="card-text">{{room.address}}</p>
+                <p class="card-text">{{room.movingDate | date}}</p>
+                <a [routerLink]="['/room',room.id,'search']" class="btn btn-outline-primary m-1">Search room</a>
                 <a href="#" class="btn btn-outline-primary m-1">Messeges form this Ad</a>
               </div>
             </div>
@@ -30,7 +30,7 @@
           </div>
         </div>
   </div>
-  <div class="profiles">
+  <div class="profiles" *ngIf="profiles.length > 0">
       <div class="row">
           <div class="col-12">
               <h4 class="text-muted font-12">Profiles</h4>      
@@ -40,7 +40,7 @@
                 <h4 class="card-title">User {{profile.userId}}</h4>
                 <p class="card-text">{{profile.address}}</p>
                 <p class="card-text">{{profile.movingDate | date}}</p>
-                <a href="#" class="btn btn-outline-primary m-1">Search room/roommate</a>
+                <a [routerLink]="['/roommate',profile.id,'search']" class="btn btn-outline-primary m-1">Search roommate</a>
                 <a href="#" class="btn btn-outline-primary m-1">Messeges form this Ad</a>
               </div>
             </div>

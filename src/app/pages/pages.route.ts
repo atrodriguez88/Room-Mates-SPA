@@ -10,6 +10,8 @@ import { AdsComponent } from './ads/ads.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { AddRoommateComponent } from './add-roommate/add-roommate.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { SearchRoommateComponent } from './search-roommate/search-roommate.component';
+import { SearchRoomComponent } from './search-room/search-room.component';
 
 const routes: Routes = [
 
@@ -22,8 +24,10 @@ const routes: Routes = [
             { path: 'account', component: ProfileComponent, data: { title: 'Profile' } },
             { path: 'inbox', component: InboxComponent, data: { title: 'Inbox' } },
             { path: 'ads', component: AdsComponent, data: { title: 'My Ads' } },
-            { path: 'ads/room', component: AddRoomComponent, data: { title: 'New Room' } },
-            { path: 'ads/roommate', component: AddRoommateComponent, data: { title: 'New Roommate' } },
+            { path: 'ads/save/room', component: AddRoomComponent, data: { title: 'Room' } },
+            { path: 'ads/save/roommate', component: AddRoommateComponent, data: { title: 'Roommate' } },
+            { path: 'roommate/:id/search', component: SearchRoommateComponent, data: { title: 'Search RoomMate' } },
+            { path: 'room/:id/search', component: SearchRoomComponent, data: { title: 'Search Room' } },
             { path: 'upgrade', component: UpgradeComponent, data: { title: 'Upgrade' } },
         ]
     },

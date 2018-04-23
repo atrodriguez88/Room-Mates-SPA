@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import { SideBarService, AdsService } from './services.index';
+import { SideBarService, RoomService, ProfileService } from './services.index';
 
 
 @NgModule({
@@ -12,7 +12,8 @@ import { SideBarService, AdsService } from './services.index';
     exports: [],
     providers: [
         SideBarService,
-        AdsService
+        ProfileService,
+        RoomService
     ],
 })
 export class ServiceModule { }

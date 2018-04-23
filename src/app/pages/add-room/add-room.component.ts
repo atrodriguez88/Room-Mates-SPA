@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddRoomComponent implements OnInit {
 
+  flag: boolean = true;
   constructor() { }
 
   ngOnInit() {
   }
 
+  finishFunction() {
+
+  }
+  utility(elem: any) {
+    if (!event.target.checked)
+    {
+      return !this.flag;
+    }
+
+  }
 }
