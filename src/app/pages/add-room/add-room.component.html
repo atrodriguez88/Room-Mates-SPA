@@ -16,11 +16,11 @@
                       <label for="type"> Property Type :
                         <span class="danger">*</span>
                       </label>
-                      <select class="custom-select form-control required" id="type" name="type">
-                        <option value="">Select City</option>
-                        <option value="India">India</option>
-                        <option value="USA">USA</option>
-                        <option value="Dubai">Dubai</option>
+                      <select [(ngModel)]="room.propertyType" class="custom-select form-control required" id="type" name="type">
+                        <option value=""></option>
+                        <option value="1">House</option>
+                        <option value="2">Aparment</option>
+                        <option value="3">Studio</option>
                       </select>
                     </div>
                   </div>
@@ -28,7 +28,7 @@
                     <div class="form-group">
                       <label for="available"> Room Available :
                       </label>
-                      <select class="custom-select form-control required" id="available" name="available">
+                      <select [(ngModel)]="room.roomsToRent" class="custom-select form-control required" id="available" name="available">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -44,7 +44,7 @@
                     <div class="form-group">
                       <label for="betrooms"> Number of bedrooms :
                       </label>
-                      <select class="custom-select form-control required" id="betrooms" name="betrooms">
+                      <select [(ngModel)]="room.numberBedrooms" class="custom-select form-control required" id="betrooms" name="betrooms">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -58,7 +58,7 @@
                     <div class="form-group">
                       <label for="bathrooms"> Number of bathrooms :
                       </label>
-                      <select class="custom-select form-control required" id="bathrooms" name="bathrooms">
+                      <select [(ngModel)]="room.numberBathrooms" class="custom-select form-control required" id="bathrooms" name="bathrooms">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -285,68 +285,59 @@
               </button>
             </aw-wizard-step>
             <aw-wizard-step stepTitle="About you">
-              <h6>Your Description</h6>
+              <br>
+              <h4>Your Description</h4>
+              <hr>
               <section>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="behName1">Behaviour :</label>
-                      <input type="text" class="form-control required" id="behName1">
-                    </div>
+                      <label for="firstName1">First Name :</label>
+                      <input type="text" class="form-control" id="firstName1"> </div>
+                  </div>
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label for="participants1">Confidance</label>
-                      <input type="text" class="form-control required" id="participants1">
-                    </div>
+                      <label for="lastName1">Last Name :</label>
+                      <input type="text" class="form-control" id="lastName1"> </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label for="participants1">Result</label>
-                      <select class="custom-select form-control required" id="participants1" name="location">
-                        <option value="">Select Result</option>
-                        <option value="Selected">Selected</option>
-                        <option value="Rejected">Rejected</option>
-                        <option value="Call Second-time">Call Second-time</option>
+                      <label for="emailAddress1">Email Address :</label>
+                      <input type="email" class="form-control" id="emailAddress1"> </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="phoneNumber1">Phone Number :</label>
+                      <input type="tel" class="form-control" id="phoneNumber1"> </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="location1">Select City :</label>
+                      <select class="custom-select form-control" id="location1" name="location">
+                        <option value="">Select City</option>
+                        <option value="Amsterdam">India</option>
+                        <option value="Berlin">USA</option>
+                        <option value="Frankfurt">Dubai</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="decisions1">Comments</label>
-                      <textarea name="decisions" id="decisions1" rows="4" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label>Rate Interviwer :</label>
-                      <div class="c-inputs-stacked">
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">1 star</span>
-                        </label>
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">2 star</span>
-                        </label>
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">3 star</span>
-                        </label>
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">4 star</span>
-                        </label>
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">5 star</span>
-                        </label>
-                      </div>
-                    </div>
+                      <label for="date1">Date of Birth :</label>
+                      <input type="date" class="form-control" id="date1"> </div>
                   </div>
                 </div>
               </section>
-              <button type="button" awPreviousStep>Previous Step</button>
-              <button type="button" (click)="finishFunction()">Finish</button>
+              <button type="button" class="btn btn-success" awPreviousStep>
+                <i class="fa fa-arrow-circle-left"></i> Previous Step
+              </button>
+              <button type="button" class="btn btn-success" (click)="finishFunction()">
+                <i class="fa fa-check"></i> Finish
+              </button>
             </aw-wizard-step>
           </aw-wizard>
         </form>

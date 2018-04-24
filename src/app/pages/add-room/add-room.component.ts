@@ -7,6 +7,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddRoomComponent implements OnInit {
 
+  room = {
+    address: null,
+    propertyType: null,
+    numberBedrooms: null,
+    numberBathrooms: null,
+    roomsToRent: null,
+    propertyFeatures: [],
+    rules: [
+      {
+        id: null,
+        name: null
+      }
+    ],
+    rentPerMonth: null,
+    isUtilityIncluded: null,
+    roomType: null,
+    roomSquareMeters: null,
+    isFurnished: null,
+    roomFeatures: [
+      {
+        id: null,
+        name: null
+      }
+    ],
+    availableFrom: null,
+    minStayMonths: null,
+    prefMaxAge: null,
+    smoking: null,
+    pet: null,
+    cleanliness: null,
+    numberRoomatesAlready: null,
+    prefGender: null,
+    ocupationId: null,
+    prefOcuppations: null,
+    prefMinAge: null,
+    userId: 0
+  }
+
   flag: boolean = true;
   constructor() { }
 
@@ -17,8 +55,7 @@ export class AddRoomComponent implements OnInit {
 
   }
   utility(elem: any) {
-    if (!event.target.checked)
-    {
+    if (!event.target.checked) {
       return !this.flag;
     }
 
