@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RulesService } from '../../services/services.index';
 
 @Component({
   selector: 'app-add-room',
@@ -43,10 +44,15 @@ export class AddRoomComponent implements OnInit {
     prefOcuppations: null,
     prefMinAge: null,
     userId: 0
-  }
+  };
 
   flag: boolean = true;
-  constructor() { }
+  constructor(private _rules: RulesService) {
+    _rules.getRules().subscribe(res => {
+      console.log(res);
+
+    });
+  }
 
   ngOnInit() {
   }
@@ -55,9 +61,9 @@ export class AddRoomComponent implements OnInit {
 
   }
   utility(elem: any) {
-    if (!event.target.checked) {
-      return !this.flag;
-    }
+    // if (!event.target.checked) {
+    //   return !this.flag;
+    // }
 
   }
 }

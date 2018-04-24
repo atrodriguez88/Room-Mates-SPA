@@ -7,7 +7,7 @@ export class RulesService {
   constructor(private http: Http) { }
 
   getRules() {
-    const urlBase = 'http://localhost:5050/api/';
+    const urlBase = 'http://localhost:5000/api/';
 
     return this.http.get(`${urlBase}rules`)
       .map((res) => {
