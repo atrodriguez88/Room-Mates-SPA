@@ -17,7 +17,6 @@
                         <span class="danger">*</span>
                       </label>
                       <select [(ngModel)]="room.propertyType" class="custom-select form-control required" id="type" name="type">
-                        <option value=""></option>
                         <option value="1">House</option>
                         <option value="2">Aparment</option>
                         <option value="3">Studio</option>
@@ -74,18 +73,11 @@
                     <div class="form-group">
                       <label>Rules :</label>
                       <ul style="list-style: none">
-                        <li>
+                        <li *ngFor="let rule of rules">
                           <label class="custom-control custom-checkbox block">
-                            <input type="checkbox" class="custom-control-input">
+                            <input (change)="onRuleChenge(rule.id, $event)" type="checkbox" class="custom-control-input">
                             <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description ml-0">Smoking inside the property allowed</span>
-                          </label>
-                        </li>
-                        <li>
-                          <label class="custom-control custom-checkbox block">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description ml-0">Families and children accepted</span>
+                            <span class="custom-control-description ml-0">{{rule.name}}</span>
                           </label>
                         </li>
                       </ul>
@@ -101,11 +93,6 @@
                           <input type="checkbox" class="custom-control-input">
                           <span class="custom-control-indicator"></span>
                           <span class="custom-control-description ml-0">Pool</span>
-                        </label>
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">Parking</span>
                         </label>
                       </div>
                     </div>
