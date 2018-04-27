@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RulesService } from '../../services/services.index';
+import { RulesService, RoomFeaturesService, PropertyFeaturesService,
+         OcupService, PropertyTypeService,  } from '../../services/services.index';
 
 @Component({
   selector: 'app-add-room',
@@ -36,13 +37,35 @@ export class AddRoomComponent implements OnInit {
     userId: 0
   };
   rules: any[] = [];
+  roomF: any[] = [];
+  propertType: any[] = [];
+  propertyF: any[] = [];
+  ocupations: any[] = [];
 
-  flag: boolean = true;
-  constructor(private _rules: RulesService) {
+  flag = true;
+  constructor(private _rules: RulesService, private _roomF: RoomFeaturesService, private _propertyT: PropertyTypeService,
+              private _propertyF: PropertyFeaturesService, private _ocupations: OcupService )
+  {
+
     _rules.getRules().subscribe(res => {
       console.log(res);
       this.rules = res;
-
+    });
+   _roomF.getRoomFeatures().subscribe(res => {
+      console.log(res);
+      this.roomF = res;
+    });
+    _propertyT.getPropertyType().subscribe(res => {
+      console.log(res);
+      this.propertType = res;
+    });
+    _propertyF.getPropertyFeatures().subscribe(res => {
+      console.log(res);
+      this.propertyF = res;
+    });
+    _ocupations.getOcupations().subscribe(res => {
+      console.log(res);
+      this.ocupations = res;
     });
   }
 

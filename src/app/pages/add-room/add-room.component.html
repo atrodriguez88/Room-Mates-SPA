@@ -17,9 +17,7 @@
                         <span class="danger">*</span>
                       </label>
                       <select [(ngModel)]="room.propertyType" class="custom-select form-control required" id="type" name="type">
-                        <option value="1">House</option>
-                        <option value="2">Aparment</option>
-                        <option value="3">Studio</option>
+                        <option *ngFor="let type of propertType" [value]="type.id">{{type.name}}</option>
                       </select>
                     </div>
                   </div>
@@ -89,10 +87,10 @@
                     <div class="form-group">
                       <label>Features :</label>
                       <div class="c-inputs-stacked">
-                        <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input">
+                        <label *ngFor="let prop of propertyF" class="inline custom-control custom-checkbox block">
+                          <input (change)="onRuleChenge(prop.id, $event)" type="checkbox" class="custom-control-input">
                           <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description ml-0">Pool</span>
+                          <span class="custom-control-description ml-0">{{prop.name}}</span>
                         </label>
                       </div>
                     </div>
@@ -192,7 +190,21 @@
                       </select>
                     </div>
                   </div>
-                </div>
+                </div>`
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Features :</label>
+                        <div class="c-inputs-stacked">
+                          <label *ngFor="let ro of roomF" class="inline custom-control custom-checkbox block">
+                            <input (change)="onRuleChenge(ro.id, $event)" type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description ml-0">{{ro.name}}</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </section>
               <button type="button" class="btn btn-success" awPreviousStep>
                 <i class="fa fa-arrow-circle-left"></i> Previous Step
@@ -239,9 +251,7 @@
                       <label for="prefOcup"> Preferred occupation :
                       </label>
                       <select class="custom-select form-control" id="prefOcup" name="prefOcup">
-                        <option value="1">Student</option>
-                        <option value="2">Professional</option>
-                        <option value="3">Doesn't matter</option>
+                          <option *ngFor="let ocup of ocupations" [value]="ocup.id">{{ocup.name}}</option>
                       </select>
                     </div>
                   </div>
