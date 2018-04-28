@@ -12,18 +12,19 @@
               <section>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-success': this.room.propertyType}">
                       <label for="type"> Property Type :
                         <span class="danger">*</span>
                       </label>
                       <select [(ngModel)]="room.propertyType" class="custom-select form-control required" id="type" name="type">
-                        <option *ngFor="let type of propertType" [value]="type.id">{{type.name}}</option>
+                        <option *ngFor="let type of propertTypes" [value]="type.id">{{type.name}}</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-success': this.room.roomsToRent}">
                       <label for="available"> Room Available :
+                        <span class="danger">*</span>
                       </label>
                       <select [(ngModel)]="room.roomsToRent" class="custom-select form-control required" id="available" name="available">
                         <option value="1">1</option>
@@ -38,8 +39,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-success': this.room.numberBedrooms}">
                       <label for="betrooms"> Number of bedrooms :
+                        <span class="danger">*</span>
                       </label>
                       <select [(ngModel)]="room.numberBedrooms" class="custom-select form-control required" id="betrooms" name="betrooms">
                         <option value="1">1</option>
@@ -52,8 +54,9 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-success': this.room.numberBathrooms}">
                       <label for="bathrooms"> Number of bathrooms :
+                        <span class="danger">*</span>
                       </label>
                       <select [(ngModel)]="room.numberBathrooms" class="custom-select form-control required" id="bathrooms" name="bathrooms">
                         <option value="1">1</option>
@@ -73,7 +76,7 @@
                       <ul style="list-style: none">
                         <li *ngFor="let rule of rules">
                           <label class="custom-control custom-checkbox block">
-                            <input (change)="onRuleChenge(rule.id, $event)" type="checkbox" class="custom-control-input">
+                            <input (change)="onRuleChange(rule.id, $event)" type="checkbox" class="custom-control-input">
                             <span class="custom-control-indicator"></span>
                             <span class="custom-control-description ml-0">{{rule.name}}</span>
                           </label>
@@ -88,7 +91,7 @@
                       <label>Features :</label>
                       <div class="c-inputs-stacked">
                         <label *ngFor="let prop of propertyF" class="inline custom-control custom-checkbox block">
-                          <input (change)="onRuleChenge(prop.id, $event)" type="checkbox" class="custom-control-input">
+                          <input (change)="onFeatureChange(prop.id, $event)" type="checkbox" class="custom-control-input">
                           <span class="custom-control-indicator"></span>
                           <span class="custom-control-description ml-0">{{prop.name}}</span>
                         </label>
@@ -97,7 +100,7 @@
                   </div>
                 </div>
               </section>
-              <button type="button" class="btn btn-success" awNextStep>
+              <button type="button" [disabled]="IsvalidS1()" class="btn btn-success" awNextStep>
                 <i class="fa fa-arrow-circle-right"></i> Next Step
               </button>
             </aw-wizard-step>
@@ -108,10 +111,13 @@
               <section>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-danger': rent.touched && !rent.valid,'has-success': rent.valid}">
                       <label for="rent">Rent per month :</label>
-                      <input type="number" class="form-control required" id="rent">
+                      <input #rent='ngModel' [(ngModel)]="this.room.rentPerMonth" name="rent" 
+                             type="number" class="form-control required" id="rent" required>
+                      <small *ngIf="rent.touched && !rent.valid" class="form-control-feedback"> This is inline help </small>
                     </div>
+
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
@@ -122,7 +128,7 @@
                           <span class="custom-control-description ml-0">Add utility costs to be paid on top of rent</span>
                         </label>
                       </div>
-                      <input *ngIf="flag" type="number" class="form-control">
+                      <input *ngIf="flagUtility" type="number" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -192,19 +198,19 @@
                   </div>
                 </div>`
                 <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label>Features :</label>
-                        <div class="c-inputs-stacked">
-                          <label *ngFor="let ro of roomF" class="inline custom-control custom-checkbox block">
-                            <input (change)="onRuleChenge(ro.id, $event)" type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description ml-0">{{ro.name}}</span>
-                          </label>
-                        </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Features :</label>
+                      <div class="c-inputs-stacked">
+                        <label *ngFor="let ro of roomF" class="inline custom-control custom-checkbox block">
+                          <input (change)="onRuleChenge(ro.id, $event)" type="checkbox" class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description ml-0">{{ro.name}}</span>
+                        </label>
                       </div>
                     </div>
                   </div>
+                </div>
               </section>
               <button type="button" class="btn btn-success" awPreviousStep>
                 <i class="fa fa-arrow-circle-left"></i> Previous Step
@@ -251,7 +257,7 @@
                       <label for="prefOcup"> Preferred occupation :
                       </label>
                       <select class="custom-select form-control" id="prefOcup" name="prefOcup">
-                          <option *ngFor="let ocup of ocupations" [value]="ocup.id">{{ocup.name}}</option>
+                        <option *ngFor="let ocup of ocupations" [value]="ocup.id">{{ocup.name}}</option>
                       </select>
                     </div>
                   </div>

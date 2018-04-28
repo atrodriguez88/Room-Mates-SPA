@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RulesService, RoomFeaturesService, PropertyFeaturesService,
-         OcupService, PropertyTypeService,  } from '../../services/services.index';
+import {
+  RulesService, RoomFeaturesService, PropertyFeaturesService,
+  OcupService, PropertyTypeService,
+} from '../../services/services.index';
 
 @Component({
   selector: 'app-add-room',
@@ -38,26 +40,25 @@ export class AddRoomComponent implements OnInit {
   };
   rules: any[] = [];
   roomF: any[] = [];
-  propertType: any[] = [];
+  propertTypes: any[] = [];
   propertyF: any[] = [];
   ocupations: any[] = [];
 
-  flag = true;
+  flagUtility = true;
   constructor(private _rules: RulesService, private _roomF: RoomFeaturesService, private _propertyT: PropertyTypeService,
-              private _propertyF: PropertyFeaturesService, private _ocupations: OcupService )
-  {
+    private _propertyF: PropertyFeaturesService, private _ocupations: OcupService) {
 
     _rules.getRules().subscribe(res => {
       console.log(res);
       this.rules = res;
     });
-   _roomF.getRoomFeatures().subscribe(res => {
+    _roomF.getRoomFeatures().subscribe(res => {
       console.log(res);
       this.roomF = res;
     });
     _propertyT.getPropertyType().subscribe(res => {
       console.log(res);
-      this.propertType = res;
+      this.propertTypes = res;
     });
     _propertyF.getPropertyFeatures().subscribe(res => {
       console.log(res);
@@ -77,21 +78,40 @@ export class AddRoomComponent implements OnInit {
   }
   utility(elem: any) {
     // if (!event.target.checked) {
-    //   return !this.flag;
+    //   return !this.flagUtility;
     // }
 
   }
-  onRuleChenge(id: number, event) {
-    console.log(id, event);
-    if (!event.target.checked) {
-      const index = this.room.rules.indexOf(id);
-      this.room.rules.splice(index, 1);
-    }
-    else {
-      this.room.rules.push(id);
-    }
+  onRuleChange(id: number, event) {
+    // console.log(id, event);
+    this.onChange(id, event, this.room.rules);
     console.log(this.room.rules);
 
+  }
+  onFeatureChange(id: number, event) {
+    this.onChange(id, event, this.room.propertyFeatures);
+    console.log(this.room.propertyFeatures);
+  }
+
+  onChange(id: number, event, sourceArray) {
+    if (!event.target.checked) {
+      const index = sourceArray.indexOf(id);
+      sourceArray.splice(index, 1);
+    }
+    else {
+      sourceArray.push(id);
+    }
+  }
+
+  IsvalidS1() {
+    if (!this.room.propertyType || !this.room.roomsToRent || !this.room.numberBedrooms || !this.room.numberBathrooms) {
+      return true;
+    }
+    return false;
+  }
+  test(){
+    console.log(this.room.propertyType, this.room.roomsToRent, this.room.numberBedrooms, this.room.numberBathrooms);
+    
   }
 
 }

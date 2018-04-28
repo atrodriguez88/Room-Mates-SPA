@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { isUndefined, isDate } from 'util';
-import { ProfileService } from '../../services/services.index';
+import { ProfileService, OcupService } from '../../services/services.index';
 import { IRoommate } from '../../interfaces/roommate';
 
 @Component({
@@ -23,27 +23,20 @@ export class AddRoommateComponent implements OnInit {
     userId: 1
   };
 
-  flagOcup = false;
-  flagGend = false;
-  flagDate = false;
+  ocupations: any[] = [];
 
-  constructor(private _profile: ProfileService) { }
+  constructor(private _profile: ProfileService, private _ocup: OcupService) {
+    this._ocup.getOcupations().subscribe(res => {
+      console.log(res);
+      this.ocupations = res;
+    }, err => {
+      console.log(err);
+    });
+  }
 
   ngOnInit() {
   }
 
-  onOcupChange() {
-    return this.flagOcup = true;
-  }
-  onGendChange() {
-    return this.flagGend = true;
-  }
-  onDateChange(elem) {
-    if (elem.value === '') {
-      return this.flagDate = false;
-    }
-    return this.flagDate = true;
-  }
   submit(form: NgForm) {
     console.log(form);
     console.log(this.profile);
