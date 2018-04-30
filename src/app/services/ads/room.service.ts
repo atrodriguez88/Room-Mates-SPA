@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { IRoom } from '../../interfaces/room';
 
 @Injectable()
 export class RoomService {
@@ -16,6 +17,11 @@ export class RoomService {
       });
   }
 
-
-
+  createRoom(room: any) {
+    return this.http.post(` ${this.urlBase}rooms`, room)
+      .map((res) => {
+        console.log(res);
+        return res.json();
+      });
+  }
 }

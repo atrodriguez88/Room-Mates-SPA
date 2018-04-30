@@ -37,8 +37,8 @@ export class AddRoommateComponent implements OnInit {
   ngOnInit() {
   }
 
-  submit(form: NgForm) {
-    console.log(form);
+  submit(f: NgForm) {
+    console.log(f);
     console.log(this.profile);
 
     this._profile.createProfile(this.profile).subscribe(res => {

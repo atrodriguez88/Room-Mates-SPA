@@ -3,7 +3,9 @@
     <div class="card">
       <div class="card-body">
 
-        <form action="#">
+        <pre>{{this.room | json}}</pre>
+
+        <form #f='ngForm' (ngSubmit)="finishFunction(f)">
           <aw-wizard>
             <aw-wizard-step stepTitle="About the property">
               <br>
@@ -100,7 +102,8 @@
                   </div>
                 </div>
               </section>
-              <button type="button" [disabled]="IsvalidS1()" class="btn btn-success" awNextStep>
+              <!-- [disabled]="IsvalidS1()" -->
+              <button type="button" class="btn btn-success" awNextStep>
                 <i class="fa fa-arrow-circle-right"></i> Next Step
               </button>
             </aw-wizard-step>
@@ -112,32 +115,35 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group" [ngClass]="{'has-danger': rent.touched && !rent.valid,'has-success': rent.valid}">
-                      <label for="rent">Rent per month :</label>
-                      <input #rent='ngModel' [(ngModel)]="this.room.rentPerMonth" name="rent" 
-                             type="number" class="form-control required" id="rent" required>
+                      <label for="rent">Rent per month :
+                        <span class="danger">*</span>
+                      </label>
+                      <input #rent='ngModel' [(ngModel)]="this.room.rentPerMonth" name="rent" type="number" class="form-control required" id="rent"
+                        required>
                       <small *ngIf="rent.touched && !rent.valid" class="form-control-feedback"> This is inline help </small>
                     </div>
 
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 align-self-end">
                     <div class="form-group">
                       <div class="c-inputs-stacked">
                         <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input" (change)="utility($event)" [checked]='true' #checkutility>
+                          <input type="checkbox" class="custom-control-input" (change)="utility($event)" [checked]='room.isUtilityIncluded'>
                           <span class="custom-control-indicator"></span>
                           <span class="custom-control-description ml-0">Add utility costs to be paid on top of rent</span>
                         </label>
                       </div>
-                      <input *ngIf="flagUtility" type="number" class="form-control">
+                      <input [(ngModel)]="room.utilityPerMonth" name="utility" *ngIf="room.isUtilityIncluded" type="number" class="form-control">
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-success': room.roomType}">
                       <label for="roomType"> Room Type :
+                        <span class="danger">*</span>
                       </label>
-                      <select class="custom-select form-control required" id="roomType" name="roomType">
+                      <select [(ngModel)]="room.roomType" class="custom-select form-control required" id="roomType" name="roomType" required>
                         <option value="1">Single Room</option>
                         <option value="2">Double Room</option>
                         <option value="3">Shared Room</option>
@@ -145,9 +151,10 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-danger': room.roomSquareMeters < 0}">
                       <label for="square">Room square meters :</label>
-                      <input type="number" class="form-control required" id="square">
+                      <input [(ngModel)]="room.roomSquareMeters" name="square" type="number" class="form-control" id="square">
+                      <small *ngIf="room.roomSquareMeters < 0" class="form-control-feedback"> Square must be greater than zero</small>
                     </div>
                   </div>
                 </div>
@@ -156,17 +163,17 @@
                     <div class="form-group">
                       <label for="furnished"> Furnished or Unfurnished :
                       </label>
-                      <select class="custom-select form-control required" id="furnished" name="furnished">
-                        <option value="1">Furnished</option>
-                        <option value="2">Unfurnished</option>
+                      <select [(ngModel)]="room.isFurnished" class="custom-select form-control required" id="furnished" name="furnished">
+                        <option value="false">Unfurnished</option>
+                        <option value="true">Furnished</option>
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 align-self-end">
                     <div class="form-group">
                       <div class="c-inputs-stacked">
                         <label class="inline custom-control custom-checkbox block">
-                          <input type="checkbox" class="custom-control-input" [checked]='true' #checkutility>
+                          <input [(ngModel)]="room.ensuiteBathroom" name="ensuite" type="checkbox" class="custom-control-input" [checked]='room.ensuiteBathroom'>
                           <span class="custom-control-indicator"></span>
                           <span class="custom-control-description ml-0">Ensuite bathroom</span>
                         </label>
@@ -177,22 +184,22 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{'has-success': room.availableFrom}">
                       <label for="from">Available from :</label>
-                      <input type="datetime" class="form-control" id="from">
+                      <input [(ngModel)]="room.availableFrom" name="from" type="date" class="form-control" placeholder="dd/mm/yyyy">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="stay"> Minimum stay in months :
                       </label>
-                      <select class="custom-select form-control" id="stay" name="stay">
-                        <option value="1">No minimum stay in months</option>
-                        <option value="2">3</option>
-                        <option value="1">6</option>
-                        <option value="2">9</option>
-                        <option value="1">12</option>
-                        <option value="2">12+</option>
+                      <select [(ngModel)]="room.minStayMonths" class="custom-select form-control" id="stay" name="stay">
+                        <option value="0">No minimum stay in months</option>
+                        <option value="3">3</option>
+                        <option value="6">6</option>
+                        <option value="9">9</option>
+                        <option value="12">12</option>
+                        <option value="15">12+</option>
                       </select>
                     </div>
                   </div>
@@ -203,7 +210,7 @@
                       <label>Features :</label>
                       <div class="c-inputs-stacked">
                         <label *ngFor="let ro of roomF" class="inline custom-control custom-checkbox block">
-                          <input (change)="onRuleChenge(ro.id, $event)" type="checkbox" class="custom-control-input">
+                          <input (change)="onRoomChange(ro.id, $event)" type="checkbox" class="custom-control-input">
                           <span class="custom-control-indicator"></span>
                           <span class="custom-control-description ml-0">{{ro.name}}</span>
                         </label>
@@ -212,6 +219,7 @@
                   </div>
                 </div>
               </section>
+              <!-- [disabled]="IsvalidS1()" -->
               <button type="button" class="btn btn-success" awPreviousStep>
                 <i class="fa fa-arrow-circle-left"></i> Previous Step
               </button>
@@ -229,7 +237,7 @@
                     <div class="form-group">
                       <label for="preferred"> Preferred gender :
                       </label>
-                      <select class="custom-select form-control" id="preferred" name="preferred">
+                      <select [(ngModel)]="room.prefGender" class="custom-select form-control" id="preferred" name="preferred">
                         <option value="1">Male</option>
                         <option value="2">Female</option>
                         <option value="3">Doesn't matter</option>
@@ -240,7 +248,7 @@
                     <div class="form-group">
                       <label for="current"> Number of roommates already living there :
                       </label>
-                      <select class="custom-select form-control" id="current" name="current">
+                      <select [(ngModel)]="room.numberRoomatesAlready" class="custom-select form-control" id="current" name="current">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -256,22 +264,22 @@
                     <div class="form-group">
                       <label for="prefOcup"> Preferred occupation :
                       </label>
-                      <select class="custom-select form-control" id="prefOcup" name="prefOcup">
+                      <select [(ngModel)]="room.ocupationId" class="custom-select form-control" id="prefOcup" name="prefOcup">
                         <option *ngFor="let ocup of ocupations" [value]="ocup.id">{{ocup.name}}</option>
                       </select>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="prefOcup"> Preferred age :
+                      <label for="prefAge"> Preferred age :
                       </label>
-                      <select class="custom-select form-control" id="prefOcup" name="prefOcup">
+                      <select [(ngModel)]="room.prefMinAge" class="custom-select form-control" id="prefAge" name="prefAge">
                         <option value="1">Range from</option>
                         <option value="2">20</option>
                         <option value="3">21</option>
                       </select>
                       <hr>
-                      <select class="custom-select form-control" id="prefOcup" name="prefOcup">
+                      <select [(ngModel)]="room.prefMaxAge" class="custom-select form-control" id="prefOcup" name="prefOcup">
                         <option value="1">Range to</option>
                         <option value="2">31</option>
                         <option value="3">32</option>
@@ -331,14 +339,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="date1">Date of Birth :</label>
-                      <input type="date" class="form-control" id="date1"> </div>
+                      <input name="date1" type="date" class="form-control" placeholder="dd/mm/yyyy"> </div>
                   </div>
                 </div>
               </section>
               <button type="button" class="btn btn-success" awPreviousStep>
                 <i class="fa fa-arrow-circle-left"></i> Previous Step
               </button>
-              <button type="button" class="btn btn-success" (click)="finishFunction()">
+              <button type="submit" class="btn btn-success" (click)="finishFunction()">
                 <i class="fa fa-check"></i> Finish
               </button>
             </aw-wizard-step>
