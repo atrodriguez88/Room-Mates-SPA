@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/services.index';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,7 @@ import { AuthService } from '../services/services.index';
 export class LoginComponent implements OnInit {
 
   model = {};
-  data;
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private route: Router) { }
 
   ngOnInit() {
   }
@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
   login() {
     console.log(this.model);
     this._auth.Login(this.model).subscribe(res => {
-      console.log(res);
-      this.data = res;
+      this.route.navigate(['/dashboard']);
     }, err => {
       console.error(err);
     });

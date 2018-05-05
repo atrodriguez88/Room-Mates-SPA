@@ -20,7 +20,7 @@
                     <a routerLinkActive="active" [routerLink]="['/inbox']">Inbox</a>
                   </li>
                   <li>
-                    <a [routerLink]="['/login']" routerLinkActive="router-link-active" >Logout</a>
+                    <a (click)="logout()" >Logout</a>
                   </li>
                 </ul>
               </li>
