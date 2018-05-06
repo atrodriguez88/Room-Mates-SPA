@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
 import {
-  RulesService, RoomFeaturesService, PropertyFeaturesService,
-  OcupService, PropertyTypeService, RoomService,
-} from '../../services/services.index';
+  RulesService,
+  RoomFeaturesService,
+  PropertyFeaturesService,
+  OcupService,
+  PropertyTypeService,
+  RoomService,
+  AlertifyService
+} from "../../services/services.index";
 
 @Component({
-  selector: 'app-add-room',
-  templateUrl: './add-room.component.html',
-  styleUrls: ['./add-room.component.css']
+  selector: "app-add-room",
+  templateUrl: "./add-room.component.html",
+  styleUrls: ["./add-room.component.css"]
 })
 export class AddRoomComponent implements OnInit {
-
   room = {
-    address: 'Falta actualizar este value',
+    address: "Falta actualizar este value",
     propertyType: null,
     numberBedrooms: null,
     numberBathrooms: null,
@@ -22,7 +26,7 @@ export class AddRoomComponent implements OnInit {
     rules: [],
     rentPerMonth: null,
     isUtilityIncluded: false,
-    utilityPerMonth: 0,    // Check API
+    utilityPerMonth: 0, // Check API
     roomType: null,
     roomSquareMeters: null,
     isFurnished: 0,
@@ -47,9 +51,15 @@ export class AddRoomComponent implements OnInit {
   propertyF: any[] = [];
   ocupations: any[] = [];
 
-  constructor(private _rules: RulesService, private _roomF: RoomFeaturesService, private _propertyT: PropertyTypeService,
-    private _propertyF: PropertyFeaturesService, private _ocupations: OcupService, private _room: RoomService) {
-
+  constructor(
+    private _rules: RulesService,
+    private _roomF: RoomFeaturesService,
+    private _propertyT: PropertyTypeService,
+    private _propertyF: PropertyFeaturesService,
+    private _ocupations: OcupService,
+    private _room: RoomService,
+    private alertify: AlertifyService
+  ) {
     _rules.getRules().subscribe(res => {
       console.log(res);
       this.rules = res;
@@ -72,27 +82,28 @@ export class AddRoomComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   finishFunction(f: NgForm) {
     console.log(f);
     console.log(this.room);
 
-    this._room.createRoom(this.room).subscribe(res => {
-      console.log(res);
-    }, err => {
-      console.log(err);
-    });
-
+    this._room.createRoom(this.room).subscribe(
+      res => {
+        this.alertify.success("Room created");
+      },
+      err => {
+        this.alertify.error(err);
+      }
+    );
   }
   utility(event) {
     console.log(event);
 
     if (!event.target.checked) {
-      return this.room.isUtilityIncluded = false;
+      return (this.room.isUtilityIncluded = false);
     }
-    return this.room.isUtilityIncluded = true;
+    return (this.room.isUtilityIncluded = true);
   }
   onRuleChange(id: number, event) {
     // console.log(id, event);
@@ -119,7 +130,12 @@ export class AddRoomComponent implements OnInit {
   }
 
   IsvalidS1() {
-    if (!this.room.propertyType || !this.room.roomsToRent || !this.room.numberBedrooms || !this.room.numberBathrooms) {
+    if (
+      !this.room.propertyType ||
+      !this.room.roomsToRent ||
+      !this.room.numberBedrooms ||
+      !this.room.numberBathrooms
+    ) {
       return true;
     }
     return false;
@@ -128,14 +144,16 @@ export class AddRoomComponent implements OnInit {
     if (this.room.isUtilityIncluded && this.room.utilityPerMonth < 0) {
       return false;
     }
-    if (!this.room.roomsToRent || !this.room.roomType || (this.room.roomSquareMeters < 0)) {
+    if (
+      !this.room.roomsToRent ||
+      !this.room.roomType ||
+      this.room.roomSquareMeters < 0
+    ) {
       return true;
     }
     return false;
   }
   test(event) {
     console.log(event);
-
   }
-
 }

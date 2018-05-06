@@ -1,29 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { RoomService, ProfileService } from '../../services/services.index';
+import { Component, OnInit } from "@angular/core";
+import {
+  RoomService,
+  ProfileService,
+  AlertifyService
+} from "../../services/services.index";
 
 @Component({
-  selector: 'app-ads',
-  templateUrl: './ads.component.html',
-  styleUrls: ['./ads.component.css']
+  selector: "app-ads",
+  templateUrl: "./ads.component.html",
+  styleUrls: ["./ads.component.css"]
 })
 export class AdsComponent implements OnInit {
-
   profiles: any[] = [];
   rooms: any[] = [];
-  constructor(private _rooms: RoomService, private _profile: ProfileService) {
-    _profile.getProfiles().subscribe(res => {
-      this.profiles = res;
-    }, err => {
-      console.error('Ads services', err);
-    });
-    _rooms.getRooms().subscribe(res => {
-      this.rooms = res;
-    }, err => {
-      console.error('Ads services', err);
-    });
+  constructor(
+    private _rooms: RoomService,
+    private _profile: ProfileService,
+    private alertify: AlertifyService
+  ) {
+    _profile.getProfiles().subscribe(
+      res => {
+        this.profiles = res;
+      },
+      err => {
+        this.alertify.error(err);
+      }
+    );
+    _rooms.getRooms().subscribe(
+      res => {
+        this.rooms = res;
+      },
+      err => {
+        this.alertify.error(err);
+      }
+    );
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

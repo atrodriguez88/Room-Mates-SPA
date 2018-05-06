@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 
 import { SideBarService, RoomService, ProfileService, RulesService,
          OcupService, RoomFeaturesService, PropertyTypeService,
-          PropertyFeaturesService, AuthService} from './services.index';
+          PropertyFeaturesService, AuthService, AlertifyService} from './services.index';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { SideBarService, RoomService, ProfileService, RulesService,
         RoomFeaturesService,
         PropertyTypeService,
         PropertyFeaturesService,
-        AuthService
+        AuthService,
+        AlertifyService
     ],
 })
 export class ServiceModule { }

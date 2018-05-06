@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { isUndefined, isDate } from 'util';
-import { ProfileService, OcupService } from '../../services/services.index';
+import { ProfileService, OcupService, AlertifyService } from '../../services/services.index';
 import { IRoommate } from '../../interfaces/roommate';
 
 @Component({
@@ -25,7 +25,7 @@ export class AddRoommateComponent implements OnInit {
 
   ocupations: any[] = [];
 
-  constructor(private _profile: ProfileService, private _ocup: OcupService) {
+  constructor(private _profile: ProfileService, private _ocup: OcupService, private alertify: AlertifyService) {
     this._ocup.getOcupations().subscribe(res => {
       console.log(res);
       this.ocupations = res;
@@ -42,9 +42,9 @@ export class AddRoommateComponent implements OnInit {
     console.log(this.profile);
 
     this._profile.createProfile(this.profile).subscribe(res => {
-      console.log(res);
+      this.alertify.error('Profile created');
     }, err => {
-      console.log(err);
+      this.alertify.error(err);
     });
   }
 

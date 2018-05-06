@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/services.index';
+import { AuthService, AlertifyService } from '../services/services.index';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   model = {};
-  constructor(private _auth: AuthService, private route: Router) { }
+  constructor(private _auth: AuthService, private route: Router, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     this._auth.Login(this.model).subscribe(res => {
       this.route.navigate(['/dashboard']);
     }, err => {
+      this.alertify.error(err);
       console.error(err);
     });
   }

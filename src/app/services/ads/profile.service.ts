@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { IRoommate } from '../../interfaces/roommate';
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class ProfileService {
@@ -24,4 +28,18 @@ export class ProfileService {
                 return res.json();
             });
     }
+
+    private handleError(error) {
+        console.error(error);
+        const serveError = error.json().error;
+        let modelStateErrors = '';
+        if (serveError) {
+          for (const key in serveError) {
+            if (serveError.hasOwnProperty(key)) {
+              modelStateErrors = serveError[key];
+            }
+          }
+        }
+        return Observable.throw(modelStateErrors || 'Server error');
+      }
 }
