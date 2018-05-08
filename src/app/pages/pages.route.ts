@@ -12,6 +12,7 @@ import { AddRoommateComponent } from './add-roommate/add-roommate.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { SearchRoommateComponent } from './search-roommate/search-roommate.component';
 import { SearchRoomComponent } from './search-room/search-room.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
 
@@ -29,7 +30,9 @@ const routes: Routes = [
             { path: 'roommate/:id/search', component: SearchRoommateComponent, data: { title: 'Search RoomMate' } },
             { path: 'room/:id/search', component: SearchRoomComponent, data: { title: 'Search Room' } },
             { path: 'upgrade', component: UpgradeComponent, data: { title: 'Upgrade' } },
-        ]
+        ],
+        canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always'
     },
 ];
 

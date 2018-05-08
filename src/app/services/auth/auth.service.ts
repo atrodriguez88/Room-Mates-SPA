@@ -1,18 +1,25 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Http, RequestOptions, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 import "rxjs/add/observable/throw";
-import { Router } from "@angular/router";
+import { HttpClientModule } from "@angular/common/http";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable()
 export class AuthService {
   urlBase = "http://localhost:5000/api/account/";
   token: string;
   expiration: string;
+  decodedToken: any;
 
-  constructor(private http: Http, private router: Router) {}
+  constructor(
+    private http: Http,
+    private router: Router,
+    private jwtHelper: JwtHelperService
+  ) {}
 
   getUser() {
     return this.http
@@ -39,9 +46,15 @@ export class AuthService {
           localStorage.setItem("expiration", user.expiration);
           this.token = user.token;
           this.expiration = user.expiration;
+          this.decodedToken = this.jwtHelper.decodeToken(this.token);
+          console.log(this.decodedToken);
         }
       })
       .catch(this.handleError);
+  }
+
+  loggedIn() {
+    return !this.jwtHelper.isTokenExpired(this.token);
   }
 
   logout() {
@@ -55,22 +68,23 @@ export class AuthService {
     const headers = new Headers({ "Content-Type": "application/json" });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(`${this.urlBase}create`, body, options)
-    .map(res => {
-      const user = res.json();
-      if (user) {
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("expiration", user.expiration);
-        this.token = user.token;
-        this.expiration = user.expiration;
-      }
-    })
-    .catch(this.handleError);
+    return this.http
+      .post(`${this.urlBase}create`, body, options)
+      .map(res => {
+        const user = res.json();
+        if (user) {
+          localStorage.setItem("token", user.token);
+          localStorage.setItem("expiration", user.expiration);
+          this.token = user.token;
+          this.expiration = user.expiration;
+        }
+      })
+      .catch(this.handleError);
   }
   private handleError(error) {
     console.error(error);
     const serveError = error.json().error;
-    let modelStateErrors = '';
+    let modelStateErrors = "";
     if (serveError) {
       for (const key in serveError) {
         if (serveError.hasOwnProperty(key)) {
@@ -78,6 +92,6 @@ export class AuthService {
         }
       }
     }
-    return Observable.throw(modelStateErrors || 'Server error');
+    return Observable.throw(modelStateErrors || "Server error");
   }
 }
