@@ -11,17 +11,7 @@ import { IRoommate } from '../../interfaces/roommate';
 })
 export class AddRoommateComponent implements OnInit {
 
-  profile: IRoommate = {
-    // id: null,
-    age: null,
-    gender: '',
-    ocupationId: null,
-    address: '',
-    maxRentMonth: '',
-    movingDate: '',
-    comentarios: '',
-    userId: 1
-  };
+  profile: IRoommate;
 
   ocupations: any[] = [];
 
@@ -32,6 +22,7 @@ export class AddRoommateComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+    this.profile.address = '';
   }
 
   ngOnInit() {

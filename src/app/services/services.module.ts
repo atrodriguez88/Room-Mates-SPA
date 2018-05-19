@@ -10,6 +10,7 @@ import {
   PropertyTypeService,
   PropertyFeaturesService,
   AuthService,
+  UserService,
   AlertifyService
 } from "./services.index";
 import { HttpClientModule } from "@angular/common/http";
@@ -18,15 +19,15 @@ import { JwtModule, JwtHelperService } from "@auth0/angular-jwt";
 @NgModule({
   declarations: [],
   imports: [
-     HttpModule,
-      HttpClientModule,
-      JwtModule.forRoot({
-        config: {
-          tokenGetter: () => {
-            return '';
-          }
+    HttpModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return "";
         }
-      })
+      }
+    })
   ],
   exports: [],
   providers: [
@@ -40,6 +41,7 @@ import { JwtModule, JwtHelperService } from "@auth0/angular-jwt";
     PropertyFeaturesService,
     AlertifyService,
     AuthService,
+    UserService,
     JwtHelperService
   ]
 })

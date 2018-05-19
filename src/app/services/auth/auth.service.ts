@@ -7,10 +7,11 @@ import "rxjs/add/operator/map";
 import "rxjs/add/observable/throw";
 import { HttpClientModule } from "@angular/common/http";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class AuthService {
-  urlBase = "http://localhost:5000/api/account/";
+  urlBase = `${environment.ApiUrl}account/`;
   token: string;
   expiration: string;
   decodedToken: any;

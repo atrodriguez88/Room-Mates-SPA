@@ -10,7 +10,7 @@
               <div class="col-md-6">
                 <div class="form-group" [ngClass]="{'has-danger': inPlace.touched && !inPlace.valid,'has-success': inPlace.valid}">
                   <label class="control-label">Place</label>
-                  <input #inPlace='ngModel' [(ngModel)]="profile.address" name="place" type="text" id="place" class="form-control form-control-danger"
+                  <input #inPlace='ngModel' (ngModel)="profile.address" name="place" type="text" id="place" class="form-control form-control-danger"
                     placeholder="Where do you want to live?" required>
                   <small *ngIf="inPlace.touched && !inPlace.valid" class="form-control-feedback"> This field has error. </small>
                 </div>

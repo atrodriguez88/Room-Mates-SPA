@@ -22,6 +22,7 @@ import { SearchRoomComponent } from './search-room/search-room.component';
 import { SearchRoommateComponent } from './search-roommate/search-roommate.component';
 
 import { ArchwizardModule } from 'angular-archwizard';
+import { MemberListComponent } from './member-list/member-list.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { ArchwizardModule } from 'angular-archwizard';
         InboxComponent,
         UpgradeComponent,
         SearchRoomComponent,
-        SearchRoommateComponent
+        SearchRoommateComponent,
+        MemberListComponent
     ],
     imports: [
         CommonModule,

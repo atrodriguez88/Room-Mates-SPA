@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class OcupService {
@@ -7,7 +8,7 @@ export class OcupService {
   constructor(private http: Http) { }
 
   getOcupations() {
-    const urlBase = 'http://localhost:5000/api/';
+    const urlBase = environment.ApiUrl;
     return this.http.get(`${urlBase}ocupations`)
       .map((res) => {
         console.log(res);

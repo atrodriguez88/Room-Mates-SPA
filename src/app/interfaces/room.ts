@@ -15,7 +15,7 @@ export interface IRoom {
     isFurnished: number;
     ensuiteBathroom: boolean;
     roomFeatures: any[];
-    availableFrom: string;
+    availableFrom: Date;
     minStayMonths: number;
     prefMaxAge: number;
     smoking: number;

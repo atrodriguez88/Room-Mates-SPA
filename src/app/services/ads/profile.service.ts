@@ -5,11 +5,12 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
 import "rxjs/add/observable/throw";
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ProfileService {
 
-    urlBase = 'http://localhost:5000/api/';
+    urlBase = environment.ApiUrl;
 
     constructor(private http: Http) { }
 

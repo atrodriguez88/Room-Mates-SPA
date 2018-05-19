@@ -13,6 +13,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { SearchRoommateComponent } from './search-roommate/search-roommate.component';
 import { SearchRoomComponent } from './search-room/search-room.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { MemberListComponent } from './member-list/member-list.component';
 
 const routes: Routes = [
 
@@ -30,9 +31,10 @@ const routes: Routes = [
             { path: 'roommate/:id/search', component: SearchRoommateComponent, data: { title: 'Search RoomMate' } },
             { path: 'room/:id/search', component: SearchRoomComponent, data: { title: 'Search Room' } },
             { path: 'upgrade', component: UpgradeComponent, data: { title: 'Upgrade' } },
+            { path: 'members', component: MemberListComponent, data: { title: 'Members' } },
         ],
-        canActivate: [AuthGuard],
-        runGuardsAndResolvers: 'always'
+        // canActivate: [AuthGuard],
+        // runGuardsAndResolvers: 'always'
     },
 ];
 

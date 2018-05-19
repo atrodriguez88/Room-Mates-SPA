@@ -9,6 +9,8 @@ import {
   RoomService,
   AlertifyService
 } from "../../services/services.index";
+import { IRoom } from "../../interfaces/room";
+import { getLocaleDateFormat, FormatWidth } from "@angular/common";
 
 @Component({
   selector: "app-add-room",
@@ -16,35 +18,7 @@ import {
   styleUrls: ["./add-room.component.css"]
 })
 export class AddRoomComponent implements OnInit {
-  room = {
-    address: "Falta actualizar este value",
-    propertyType: null,
-    numberBedrooms: null,
-    numberBathrooms: null,
-    roomsToRent: null,
-    propertyFeatures: [],
-    rules: [],
-    rentPerMonth: null,
-    isUtilityIncluded: false,
-    utilityPerMonth: 0, // Check API
-    roomType: null,
-    roomSquareMeters: null,
-    isFurnished: 0,
-    ensuiteBathroom: null,
-    roomFeatures: [],
-    availableFrom: Date.now, // check format
-    minStayMonths: 0,
-    prefMaxAge: null,
-    smoking: null,
-    pet: null,
-    cleanliness: null,
-    numberRoomatesAlready: 1,
-    prefGender: 1,
-    ocupationId: null,
-    prefOcuppations: 1,
-    prefMinAge: null,
-    userId: 1
-  };
+  room: IRoom;
   rules: any[] = [];
   roomF: any[] = [];
   propertTypes: any[] = [];
@@ -86,6 +60,7 @@ export class AddRoomComponent implements OnInit {
 
   finishFunction(f: NgForm) {
     console.log(f);
+    this.room.userId = 1;
     console.log(this.room);
 
     this._room.createRoom(this.room).subscribe(

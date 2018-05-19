@@ -5,7 +5,7 @@ export interface IRoommate {
     ocupationId: number;
     address: string;
     maxRentMonth: string;
-    movingDate: string;
+    movingDate: Date;
     comentarios: string;
     userId: number;
 
