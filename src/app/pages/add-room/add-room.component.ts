@@ -18,7 +18,35 @@ import { getLocaleDateFormat, FormatWidth } from "@angular/common";
   styleUrls: ["./add-room.component.css"]
 })
 export class AddRoomComponent implements OnInit {
-  room: IRoom;
+  room: IRoom = {
+    address: "Falta actualizar este value",
+    propertyType: null,
+    numberBedrooms: null,
+    numberBathrooms: null,
+    roomsToRent: null,
+    propertyFeatures: [],
+    rules: [],
+    rentPerMonth: null,
+    isUtilityIncluded: false,
+    utilityPerMonth: 0, // Check API
+    roomType: null,
+    roomSquareMeters: null,
+    isFurnished: 0,
+    ensuiteBathroom: null,
+    roomFeatures: [],
+    availableFrom: null, // check format
+    minStayMonths: 0,
+    prefMaxAge: null,
+    smoking: null,
+    pet: null,
+    cleanliness: null,
+    numberRoomatesAlready: 1,
+    prefGender: 1,
+    ocupationId: null,
+    prefOcuppations: 1,
+    prefMinAge: null,
+    userId: 1
+  };
   rules: any[] = [];
   roomF: any[] = [];
   propertTypes: any[] = [];

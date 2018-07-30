@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(form) {
+    console.log(this.model);
     this._auth.register(this.model).subscribe(res => {
       this.router.navigate(['/dashboard']);
     }, err => {

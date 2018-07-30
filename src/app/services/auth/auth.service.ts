@@ -66,6 +66,8 @@ export class AuthService {
 
   register(model: any) {
     const body = JSON.stringify(model);
+    console.log(body);
+    
     const headers = new Headers({ "Content-Type": "application/json" });
     const options = new RequestOptions({ headers: headers });
 

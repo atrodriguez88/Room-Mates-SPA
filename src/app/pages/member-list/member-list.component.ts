@@ -23,6 +23,7 @@ export class MemberListComponent implements OnInit {
         console.log(this.users);
       },
       err => {
+        console.log(err);
         this._alertify.error(err);
       }
     );

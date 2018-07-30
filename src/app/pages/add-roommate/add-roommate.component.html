@@ -6,13 +6,26 @@
           <div class="form-body">
             <h3 class="card-title">Profile</h3>
             <hr>
+            <div *ngIf="hasRoommate" class="alert alert-danger" role="alert">
+              You can't create a new roommate because you have one.
+            </div>
             <div class="row p-t-20">
+
+                <div class="col-md-12">
+                    <div class="form-group" [ngClass]="{'has-danger': inPlace.touched && !inPlace.valid,'has-success': inPlace.valid}">
+                      <label class="control-label">Place</label>
+                      <input #inPlace='ngModel' [(ngModel)]="profile.address" name="place" type="text" id="place" class="form-control form-control-danger"
+                        placeholder="Where do you want to live?" required>
+                      <small *ngIf="inPlace.touched && !inPlace.valid" class="form-control-feedback"> This field has error. </small>
+                    </div>
+                  </div>
+
               <div class="col-md-6">
-                <div class="form-group" [ngClass]="{'has-danger': inPlace.touched && !inPlace.valid,'has-success': inPlace.valid}">
-                  <label class="control-label">Place</label>
-                  <input #inPlace='ngModel' (ngModel)="profile.address" name="place" type="text" id="place" class="form-control form-control-danger"
-                    placeholder="Where do you want to live?" required>
-                  <small *ngIf="inPlace.touched && !inPlace.valid" class="form-control-feedback"> This field has error. </small>
+                <div class="form-group" [ngClass]="{'has-danger': inNick.touched && !inNick.valid,'has-success': inNick.valid}">
+                  <label class="control-label">Nickname </label>
+                  <input #inNick='ngModel' [(ngModel)]="profile.nickname" name="nickname" type="text" id="place" class="form-control form-control-danger"
+                    placeholder="Nickname or username" required>
+                  <small *ngIf="inNick.touched && !inNick.valid" class="form-control-feedback"> This field has error. </small>
                 </div>
               </div>
               <!--/span-->
@@ -81,7 +94,7 @@
             </div>
           </div>
           <div class="form-actions">
-            <button [disabled]="!f.valid" type="submit" class="btn btn-success">
+            <button [disabled]="!f.valid && hasRoommate" type="submit" class="btn btn-success">
               <i class="fa fa-check"></i> Save</button>
             <button type="button" class="btn btn-inverse">Cancel</button>
           </div>

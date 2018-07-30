@@ -5,4 +5,6 @@ export interface IUser {
   notificationViaEmail: boolean;
   showPhone: boolean;
   aboutMe: string;
+  address: string;
+  phoneNumber: string;
 }

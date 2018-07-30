@@ -4,6 +4,7 @@ import {
   ProfileService,
   AlertifyService
 } from "../../services/services.index";
+import { IRoommate } from "../../interfaces/roommate";
 
 @Component({
   selector: "app-ads",
@@ -11,7 +12,7 @@ import {
   styleUrls: ["./ads.component.css"]
 })
 export class AdsComponent implements OnInit {
-  profiles: any[] = [];
+  profile: IRoommate;
   rooms: any[] = [];
   constructor(
     private _rooms: RoomService,
@@ -20,7 +21,7 @@ export class AdsComponent implements OnInit {
   ) {
     _profile.getProfiles().subscribe(
       res => {
-        this.profiles = res;
+        this.profile = res;
       },
       err => {
         this.alertify.error(err);

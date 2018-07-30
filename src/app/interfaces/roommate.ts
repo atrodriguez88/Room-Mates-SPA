@@ -1,5 +1,6 @@
 export interface IRoommate {
     // id: number;
+    nickname: null;
     age: number;
     gender: string;
     ocupationId: number;

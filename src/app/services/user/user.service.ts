@@ -14,6 +14,16 @@ export class UserService {
 
   constructor(private http: Http) {}
 
+  getUser(id: string): Observable<IUser> {
+    return this.http
+      .get(`${this.urlBase}${id}`, this.jwt())
+      .map(res => {
+        console.log(res.json());
+        return <IUser>res.json();
+      })
+      .catch(this.handleError);
+  }
+
   getUsers(): Observable<IUser[]> {
     return this.http
       .get(this.urlBase, this.jwt())
@@ -51,8 +61,8 @@ export class UserService {
   private jwt() {
     const token = localStorage.getItem("token");
     if (token) {
-      const headers = new Headers({ "Authorization": "Bearer " + token });
-      headers.append( "Content-Type", "application/json" );
+      const headers = new Headers({ Authorization: "Bearer " + token });
+      headers.append("Content-Type", "application/json");
       return new RequestOptions({ headers: headers });
     }
   }
